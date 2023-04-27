@@ -6,11 +6,12 @@ declare(strict_types=1);
  * This file is part of System Information Bundle for Contao Open Source CMS.
  *
  * (c) eikona-media.de
+ * (c) bwein.net
  *
  * @license MIT
  */
 
-namespace EikonaMedia\Contao\SystemInformation\Service\InfoObjects;
+namespace Bwein\SystemInformation\Service\InfoObjects;
 
 use Linfo\Exceptions\FatalException;
 use Linfo\Linfo;

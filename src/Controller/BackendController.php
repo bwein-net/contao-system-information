@@ -6,18 +6,19 @@ declare(strict_types=1);
  * This file is part of System Information Bundle for Contao Open Source CMS.
  *
  * (c) eikona-media.de
+ * (c) bwein.net
  *
  * @license MIT
  */
 
-namespace EikonaMedia\Contao\SystemInformation\Controller;
+namespace Bwein\SystemInformation\Controller;
 
+use Bwein\SystemInformation\Service\SystemInformationService;
 use Contao\BackendUser;
 use Contao\CoreBundle\Controller\AbstractBackendController;
 use Contao\CoreBundle\Exception\AccessDeniedException;
 use Contao\Message;
 use Contao\System;
-use EikonaMedia\Contao\SystemInformation\Service\SystemInformationService;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -51,8 +52,8 @@ class BackendController extends AbstractBackendController
     {
         $this->checkPermissions();
         $parameters = [
-            'title' => $this->translator->trans('eimed.system_info.title'),
-            'headline' => $this->translator->trans('eimed.system_info.title'),
+            'title' => $this->translator->trans('bwein.system_info.title'),
+            'headline' => $this->translator->trans('bwein.system_info.title'),
             'backUrl' => System::getReferer(),
             'messages' => Message::generate(),
             'systemLoadInfo' => $this->systemInformationService->getSystemLoadInfo(),
@@ -64,7 +65,7 @@ class BackendController extends AbstractBackendController
             'virtualizationInfo' => $this->systemInformationService->getVirtualizationInfo(),
         ];
 
-        return $this->render('@EikonaMediaContaoSystemInformation/index.html.twig', $parameters);
+        return $this->render('@BweinSystemInformation/index.html.twig', $parameters);
     }
 
     /**

@@ -3,6 +3,6 @@ services:
         autowire: true
         autoconfigure: true
 
-    EikonaMedia\Contao\SystemInformation\:
+    Bwein\SystemInformation\:
         resource: '../src/*'
         exclude: '../src/{DependencyInjection}'

@@ -2,7 +2,7 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
     <file datatype="plaintext" original="contao/languages/modules.xlf" source-language="en" target-language="en">
         <body>
-            <trans-unit id="eimed.system_info.title">
+            <trans-unit id="bwein.system_info.title">
                 <source>System Information</source>
             </trans-unit>
             <trans-unit id="MOD.system_information.0">

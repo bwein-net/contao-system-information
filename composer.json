@@ -1,5 +1,5 @@
 {
-  "name": "eikona-media/contao-system-information",
+  "name": "bwein-net/contao-system-information",
   "description": "System Information Bundle for Contao Open Source CMS",
   "keywords": [
     "contao",
@@ -10,7 +10,7 @@
     "environment"
   ],
   "type": "contao-bundle",
-  "homepage": "https://github.com/eikona-media/contao-system-information",
+  "homepage": "https://github.com/bwein-net/contao-system-information",
   "license": "MIT",
   "authors": [
     {
@@ -24,14 +24,19 @@
       "role": "Developer"
     },
     {
+      "name": "bwein.net",
+      "homepage": "https://bwein.net/",
+      "role": "Developer"
+    },
+    {
       "name": "Ralf Baussenwein",
       "homepage": "https://github.com/rabauss",
       "role": "Developer"
     }
   ],
   "support": {
-    "issues": "https://github.com/eikona-media/contao-system-information/issues",
-    "source": "https://github.com/eikona-media/contao-system-information"
+    "issues": "https://github.com/bwein-net/contao-system-information/issues",
+    "source": "https://github.com/bwein-net/contao-system-information"
   },
   "funding": [
     {
@@ -61,8 +66,11 @@
   },
   "autoload": {
     "psr-4": {
-      "EikonaMedia\\Contao\\SystemInformation\\": "src/"
+      "Bwein\\SystemInformation\\": "src/"
     }
+  },
+  "replace": {
+    "eikona-media/contao-system-information": "*"
   },
   "config": {
     "allow-plugins": {
@@ -71,7 +79,7 @@
     }
   },
   "extra": {
-    "contao-manager-plugin": "EikonaMedia\\Contao\\SystemInformation\\ContaoManager\\Plugin"
+    "contao-manager-plugin": "Bwein\\SystemInformation\\ContaoManager\\Plugin"
   },
   "scripts": {
     "ecs": [

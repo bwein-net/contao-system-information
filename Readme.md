@@ -12,7 +12,7 @@ For granting your app access to these directories you can add them to the 'open_
 Install the bundle via Composer:
 
 ```
-composer require eikona-media/contao-system-information
+composer require bwein-net/contao-system-information
 ```
 
 Afterwards clear cache:
@@ -22,7 +22,7 @@ vendor/bin/contao-console cache:clear --no-warmup
 vendor/bin/contao-console cache:warmup
 ```
 
-Now, there is a new menu entry in the System section called 'System Information', routing you to the new system information page. 
+Now, there is a new menu entry in the System section called 'System Information', routing you to the new system information page.
 
 
 ## Screenshots
@@ -31,7 +31,7 @@ Now, there is a new menu entry in the System section called 'System Information'
 
 
 ----
- 
+
 
 # System Information Bundle für Contao Open Source CMS
 
@@ -47,7 +47,7 @@ Um der App Zugriff auf diese Verzeichnisse zu gewähren, kann die 'open_basedir'
 Das Bundle kann einfach via Composer installiert werden:
 
 ```
-composer require eikona-media/contao-system-information
+composer require bwein-net/contao-system-information
 ```
 
 Danach sollte der Cache einmal geleert werden:

@@ -6,11 +6,12 @@ declare(strict_types=1);
  * This file is part of System Information Bundle for Contao Open Source CMS.
  *
  * (c) eikona-media.de
+ * (c) bwein.net
  *
  * @license MIT
  */
 
-namespace EikonaMedia\Contao\SystemInformation\EventListener;
+namespace Bwein\SystemInformation\EventListener;
 
 use Contao\BackendUser;
 use Contao\CoreBundle\ServiceAnnotation\Hook;
@@ -55,7 +56,7 @@ class NavigationListener
 
         if (!$user instanceof BackendUser || $user->hasAccess('system_information', 'modules')) {
             $modules['system']['modules']['system_information'] = [
-                'label' => $this->translator->trans('eimed.system_info.title'),
+                'label' => $this->translator->trans('bwein.system_info.title'),
                 'title' => '',
                 'class' => 'navigation system_information',
                 'href' => $this->router->generate('contao_system_information'),

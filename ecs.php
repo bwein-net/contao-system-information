@@ -23,7 +23,7 @@ return static function (ECSConfig $ecsConfig): void {
     ]);
 
     $ecsConfig->ruleWithConfiguration(HeaderCommentFixer::class, [
-        'header' => "This file is part of System Information Bundle for Contao Open Source CMS.\n\n(c) eikona-media.de\n\n@license MIT",
+        'header' => "This file is part of System Information Bundle for Contao Open Source CMS.\n\n(c) eikona-media.de\n(c) bwein.net\n\n@license MIT",
     ]);
 
     $ecsConfig->parallel();

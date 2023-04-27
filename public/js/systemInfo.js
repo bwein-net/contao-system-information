@@ -2,6 +2,7 @@
  * This file is part of System Information Bundle for Contao Open Source CMS.
  *
  * (c) eikona-media.de
+ * (c) bwein.net
  *
  * @license MIT
  */

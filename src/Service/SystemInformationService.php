@@ -6,19 +6,20 @@ declare(strict_types=1);
  * This file is part of System Information Bundle for Contao Open Source CMS.
  *
  * (c) eikona-media.de
+ * (c) bwein.net
  *
  * @license MIT
  */
 
-namespace EikonaMedia\Contao\SystemInformation\Service;
+namespace Bwein\SystemInformation\Service;
 
-use EikonaMedia\Contao\SystemInformation\Service\InfoObjects\DatabaseInfo;
-use EikonaMedia\Contao\SystemInformation\Service\InfoObjects\HardwareInfo;
-use EikonaMedia\Contao\SystemInformation\Service\InfoObjects\HostInfo;
-use EikonaMedia\Contao\SystemInformation\Service\InfoObjects\OSInfo;
-use EikonaMedia\Contao\SystemInformation\Service\InfoObjects\PHPInfo;
-use EikonaMedia\Contao\SystemInformation\Service\InfoObjects\SystemLoadInfo;
-use EikonaMedia\Contao\SystemInformation\Service\InfoObjects\VirtualizationInfo;
+use Bwein\SystemInformation\Service\InfoObjects\DatabaseInfo;
+use Bwein\SystemInformation\Service\InfoObjects\HardwareInfo;
+use Bwein\SystemInformation\Service\InfoObjects\HostInfo;
+use Bwein\SystemInformation\Service\InfoObjects\OSInfo;
+use Bwein\SystemInformation\Service\InfoObjects\PHPInfo;
+use Bwein\SystemInformation\Service\InfoObjects\SystemLoadInfo;
+use Bwein\SystemInformation\Service\InfoObjects\VirtualizationInfo;
 
 /**
  * Class SystemInformationService.
