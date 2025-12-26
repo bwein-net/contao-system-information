@@ -23,7 +23,9 @@ use Linfo\OS\OS;
 class HostInfo
 {
     private string $hostname;
+
     private string $accessedIP;
+
     private string $uptime;
 
     public function init(): self

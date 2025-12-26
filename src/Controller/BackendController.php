@@ -24,30 +24,23 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Terminal42\ServiceAnnotationBundle\Annotation\ServiceTag;
-use Twig\Environment;
 
-/**
- * @ServiceTag("controller.service_arguments")
- */
 class BackendController extends AbstractBackendController
 {
     private SystemInformationService $systemInformationService;
+
     private TokenStorageInterface $tokenStorage;
-    private Environment $twig;
+
     private TranslatorInterface $translator;
 
-    public function __construct(SystemInformationService $systemInformationService, TokenStorageInterface $tokenStorage, Environment $twig, TranslatorInterface $translator)
+    public function __construct(SystemInformationService $systemInformationService, TokenStorageInterface $tokenStorage, TranslatorInterface $translator)
     {
         $this->systemInformationService = $systemInformationService;
         $this->tokenStorage = $tokenStorage;
-        $this->twig = $twig;
         $this->translator = $translator;
     }
 
-    /**
-     * @Route("/%contao.backend.route_prefix%/system_information", name="contao_system_information", defaults={"_scope": "backend"})
-     */
+    #[Route('%contao.backend.route_prefix%/system_information', name: 'contao_system_information', defaults: ['_scope' => 'backend'])]
     public function indexAction(): Response
     {
         $this->checkPermissions();
@@ -68,9 +61,7 @@ class BackendController extends AbstractBackendController
         return $this->render('@BweinSystemInformation/index.html.twig', $parameters);
     }
 
-    /**
-     * @Route("/contao/system_information/system_load", name="contao_system_information.system_load", defaults={"_scope": "backend"})
-     */
+    #[Route('%contao.backend.route_prefix%/system_information/system_load', name: 'contao_system_information.system_load', defaults: ['_scope' => 'backend'])]
     public function getSystemLoadAction(): Response
     {
         $this->checkPermissions();

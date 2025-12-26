@@ -19,6 +19,7 @@ namespace Bwein\SystemInformation\Service\InfoObjects;
 class PHPInfo
 {
     private string $version;
+
     private array $extensions;
 
     public function init(): self

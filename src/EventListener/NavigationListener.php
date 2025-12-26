@@ -14,20 +14,21 @@ declare(strict_types=1);
 namespace Bwein\SystemInformation\EventListener;
 
 use Contao\BackendUser;
-use Contao\CoreBundle\ServiceAnnotation\Hook;
+use Contao\CoreBundle\DependencyInjection\Attribute\AsHook;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-/**
- * @Hook("getUserNavigation")
- */
+#[AsHook('getUserNavigation')]
 class NavigationListener
 {
     private RequestStack $requestStack;
+
     private RouterInterface $router;
+
     private TranslatorInterface $translator;
+
     private TokenStorageInterface $tokenStorage;
 
     public function __construct(RequestStack $requestStack, RouterInterface $router, TranslatorInterface $translator, TokenStorageInterface $tokenStorage)

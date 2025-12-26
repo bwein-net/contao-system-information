@@ -27,11 +27,17 @@ use Bwein\SystemInformation\Service\InfoObjects\VirtualizationInfo;
 class SystemInformationService
 {
     private SystemLoadInfo $systemLoadInfo;
+
     private HostInfo $hostInfo;
+
     private DatabaseInfo $databaseInfo;
+
     private PHPInfo $PHPInfo;
+
     private OSInfo $OSInfo;
+
     private HardwareInfo $hardwareInfo;
+
     private VirtualizationInfo $virtualizationInfo;
 
     public function __construct(SystemLoadInfo $systemLoadInfo, HostInfo $hostInfo, DatabaseInfo $databaseInfo, PHPInfo $PHPInfo, OSInfo $OSInfo, HardwareInfo $hardwareInfo, VirtualizationInfo $virtualizationInfo)

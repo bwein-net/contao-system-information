@@ -22,8 +22,11 @@ use Doctrine\DBAL\Exception;
 class DatabaseInfo
 {
     private Connection $connection;
+
     private string $version;
+
     private string $type;
+
     private array $sqlModes;
 
     public function __construct(Connection $connection)

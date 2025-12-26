@@ -23,9 +23,13 @@ use Linfo\OS\OS;
 class HardwareInfo
 {
     private array $cpus;
+
     private string $architecture;
+
     private string $serverModel;
+
     private int $ramTotal;
+
     private int $swapTotal;
 
     public function init(): self

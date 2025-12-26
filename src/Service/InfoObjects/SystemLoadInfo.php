@@ -23,8 +23,11 @@ use Linfo\OS\OS;
 class SystemLoadInfo
 {
     private float $last1Minute;
+
     private float $last5Minutes;
+
     private float $last15Minutes;
+
     private int $factor;
 
     public function init(): self
