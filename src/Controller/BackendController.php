@@ -27,17 +27,11 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class BackendController extends AbstractBackendController
 {
-    private SystemInformationService $systemInformationService;
-
-    private TokenStorageInterface $tokenStorage;
-
-    private TranslatorInterface $translator;
-
-    public function __construct(SystemInformationService $systemInformationService, TokenStorageInterface $tokenStorage, TranslatorInterface $translator)
-    {
-        $this->systemInformationService = $systemInformationService;
-        $this->tokenStorage = $tokenStorage;
-        $this->translator = $translator;
+    public function __construct(
+        private readonly SystemInformationService $systemInformationService,
+        private readonly TokenStorageInterface $tokenStorage,
+        private readonly TranslatorInterface $translator,
+    ) {
     }
 
     #[Route('%contao.backend.route_prefix%/system_information', name: 'contao_system_information', defaults: ['_scope' => 'backend'])]

@@ -36,7 +36,7 @@ class VirtualizationInfo
 
             $this->setType($virtualization['type'] ?? '');
             $this->setMethod($virtualization['method'] ?? '');
-        } catch (FatalException $e) {
+        } catch (FatalException) {
             $this->setType('-');
             $this->setMethod('-');
         }

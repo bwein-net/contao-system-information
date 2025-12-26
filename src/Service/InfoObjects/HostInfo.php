@@ -42,7 +42,7 @@ class HostInfo
             $this->setHostname($hostname);
             $this->setAccessedIP($accessedIP);
             $this->setUptime($uptime['text'] ?? '');
-        } catch (FatalException $e) {
+        } catch (FatalException) {
             $host = gethostname();
             $ip = gethostbyname($host);
 

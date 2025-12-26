@@ -21,17 +21,14 @@ use Doctrine\DBAL\Exception;
  */
 class DatabaseInfo
 {
-    private Connection $connection;
-
     private string $version;
 
     private string $type;
 
     private array $sqlModes;
 
-    public function __construct(Connection $connection)
+    public function __construct(private readonly Connection $connection)
     {
-        $this->connection = $connection;
     }
 
     /**
@@ -42,7 +39,7 @@ class DatabaseInfo
         // get version and type
         try {
             $resultVersion = $this->connection->executeQuery('SHOW GLOBAL VARIABLES LIKE "%version%"');
-        } catch (Exception $e) {
+        } catch (Exception) {
         }
         $version = '';
         $type = '';
@@ -60,7 +57,7 @@ class DatabaseInfo
                             break;
                     }
                 }
-            } catch (\Exception $e) {
+            } catch (\Exception) {
             }
         }
         $this->setVersion($version);
@@ -69,7 +66,7 @@ class DatabaseInfo
         // get modes
         try {
             $resultModes = $this->connection->executeQuery('SHOW GLOBAL VARIABLES LIKE "%mode%"');
-        } catch (Exception $e) {
+        } catch (Exception) {
         }
         $sqlModes = [];
 
@@ -77,10 +74,10 @@ class DatabaseInfo
             try {
                 while (false !== ($row = $resultModes->fetchAssociative())) {
                     if ('sql_mode' === $row['Variable_name']) {
-                        $sqlModes = explode(',', $row['Value']);
+                        $sqlModes = explode(',', (string) $row['Value']);
                     }
                 }
-            } catch (\Exception $e) {
+            } catch (\Exception) {
             }
         }
         $this->setSqlModes($sqlModes);
