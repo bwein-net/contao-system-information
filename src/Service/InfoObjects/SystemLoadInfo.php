@@ -43,7 +43,9 @@ class SystemLoadInfo
             $this->setLast5Minutes((float) ($load['5min'] ?? 0));
             $this->setLast15Minutes((float) ($load['15min'] ?? 0));
             $this->setFactor(\count($cpu));
-        } catch (FatalException) {
+        } catch (\Throwable $e) {
+            // Linfo may trigger PHP warnings (converted to ErrorException)
+            // on restricted environments (open_basedir). Use a safe fallback.
             $loadAvg = sys_getloadavg();
 
             $this->setLast1Minute($loadAvg[0]);
