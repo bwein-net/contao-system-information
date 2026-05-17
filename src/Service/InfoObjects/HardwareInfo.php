@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Bwein\SystemInformation\Service\InfoObjects;
 
-use Linfo\Exceptions\FatalException;
 use Linfo\Linfo;
 use Linfo\OS\OS;
 
@@ -48,7 +47,7 @@ class HardwareInfo
             $this->setServerModel($model ?: '-');
             $this->setRamTotal($ram['total'] ?? 0);
             $this->setSwapTotal($ram['swapTotal'] ?? 0);
-        } catch (FatalException) {
+        } catch (\Throwable) {
             $this->setCpus([]);
             $this->setArchitecture(php_uname('m'));
             $this->setServerModel('-');

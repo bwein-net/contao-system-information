@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Bwein\SystemInformation\Service\InfoObjects;
 
-use Linfo\Exceptions\FatalException;
 use Linfo\Linfo;
 use Linfo\OS\OS;
 
@@ -36,7 +35,7 @@ class VirtualizationInfo
 
             $this->setType($virtualization['type'] ?? '');
             $this->setMethod($virtualization['method'] ?? '');
-        } catch (FatalException) {
+        } catch (\Throwable) {
             $this->setType('-');
             $this->setMethod('-');
         }
