@@ -33,6 +33,11 @@ class OSInfo
     public function init(): self
     {
         try {
+            // If open_basedir is set and doesn't allow /sys, throw so the catch block uses the fallback
+            $openBasedir = ini_get('open_basedir');
+            if ($openBasedir !== '' && strpos($openBasedir, '/sys') === false) {
+                throw new \ErrorException('open_basedir prevents access to /sys');
+            }
             $linfo = new Linfo();
             /** @var OS $parser */
             $parser = $linfo->getParser();
@@ -44,7 +49,7 @@ class OSInfo
             $this->setDistroName($distro['name'] ?? '');
             $this->setDistroVersion($distro['version'] ?? '');
             $this->setKernel($kernel);
-        } catch (FatalException) {
+        } catch (\Throwable) {
             $this->setOs(PHP_OS_FAMILY);
             $this->setDistroName(PHP_OS);
             $this->setDistroVersion(php_uname('v'));

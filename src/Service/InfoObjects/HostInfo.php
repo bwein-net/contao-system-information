@@ -31,6 +31,11 @@ class HostInfo
     public function init(): self
     {
         try {
+            // If open_basedir is set and doesn't allow /sys, throw so the catch block uses the fallback
+            $openBasedir = ini_get('open_basedir');
+            if ($openBasedir !== '' && strpos($openBasedir, '/sys') === false) {
+                throw new \ErrorException('open_basedir prevents access to /sys');
+            }
             $linfo = new Linfo();
             /** @var OS $parser */
             $parser = $linfo->getParser();
@@ -42,7 +47,7 @@ class HostInfo
             $this->setHostname($hostname);
             $this->setAccessedIP($accessedIP);
             $this->setUptime($uptime['text'] ?? '');
-        } catch (FatalException) {
+        } catch (\Throwable) {
             $host = gethostname();
             $ip = gethostbyname($host);
 
