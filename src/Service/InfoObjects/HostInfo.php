@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Bwein\SystemInformation\Service\InfoObjects;
 
-use Linfo\Exceptions\FatalException;
 use Linfo\Linfo;
 use Linfo\OS\OS;
 
@@ -32,8 +31,8 @@ class HostInfo
     {
         try {
             // If open_basedir is set and doesn't allow /sys, throw so the catch block uses the fallback
-            $openBasedir = ini_get('open_basedir');
-            if ($openBasedir !== '' && strpos($openBasedir, '/sys') === false) {
+            $openBasedir = \ini_get('open_basedir');
+            if ('' !== $openBasedir && !str_contains($openBasedir, '/sys')) {
                 throw new \ErrorException('open_basedir prevents access to /sys');
             }
             $linfo = new Linfo();
