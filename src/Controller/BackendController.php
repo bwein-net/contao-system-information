@@ -14,22 +14,20 @@ declare(strict_types=1);
 namespace Bwein\SystemInformation\Controller;
 
 use Bwein\SystemInformation\Service\SystemInformationService;
-use Contao\BackendUser;
 use Contao\CoreBundle\Controller\AbstractBackendController;
 use Contao\CoreBundle\Exception\AccessDeniedException;
+use Contao\CoreBundle\Security\ContaoCorePermissions;
 use Contao\Message;
 use Contao\System;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class BackendController extends AbstractBackendController
 {
     public function __construct(
         private readonly SystemInformationService $systemInformationService,
-        private readonly TokenStorageInterface $tokenStorage,
         private readonly TranslatorInterface $translator,
     ) {
     }
@@ -71,15 +69,7 @@ class BackendController extends AbstractBackendController
 
     private function checkPermissions(): void
     {
-        $token = $this->tokenStorage->getToken();
-
-        if (null === $token) {
-            throw new \RuntimeException('No token provided');
-        }
-
-        $user = $token->getUser();
-
-        if (!$user instanceof BackendUser || !$user->hasAccess('system_information', 'modules')) {
+        if (!$this->isGranted(ContaoCorePermissions::USER_CAN_ACCESS_MODULE, 'system_information')) {
             throw new AccessDeniedException('Not enough permissions to access system information.');
         }
     }

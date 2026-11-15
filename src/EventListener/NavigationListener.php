@@ -13,50 +13,64 @@ declare(strict_types=1);
 
 namespace Bwein\SystemInformation\EventListener;
 
-use Contao\BackendUser;
-use Contao\CoreBundle\DependencyInjection\Attribute\AsHook;
+use Contao\CoreBundle\Event\MenuEvent;
+use Contao\CoreBundle\Security\ContaoCorePermissions;
+use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\RouterInterface;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-#[AsHook('getUserNavigation')]
+/**
+ * Adds the back end module to the "system" category of the main menu.
+ *
+ * Replaces the "getUserNavigation" hook, which is deprecated in Contao 6.
+ */
+#[AsEventListener]
 class NavigationListener
 {
+    private const ROUTE = 'contao_system_information';
+
     public function __construct(
         private readonly RequestStack $requestStack,
         private readonly RouterInterface $router,
         private readonly TranslatorInterface $translator,
-        private readonly TokenStorageInterface $tokenStorage,
+        private readonly Security $security,
     ) {
     }
 
-    public function __invoke(array $modules, bool $showAll): array
+    public function __invoke(MenuEvent $event): void
     {
-        $request = $this->requestStack->getCurrentRequest();
+        $tree = $event->getTree();
 
-        if (null === $request) {
-            return $modules;
+        if ('mainMenu' !== $tree->getName() || !$this->security->isGranted(ContaoCorePermissions::USER_CAN_ACCESS_MODULE, 'system_information')) {
+            return;
         }
 
-        $token = $this->tokenStorage->getToken();
+        $categoryNode = $tree->getChild('system');
 
-        if (null === $token) {
-            throw new \RuntimeException('No token provided');
+        if (null === $categoryNode) {
+            return;
         }
 
-        $user = $token->getUser();
+        $label = $this->translator->trans('bwein.system_info.title');
+        $isActive = self::ROUTE === $this->requestStack->getCurrentRequest()?->attributes->get('_route');
 
-        if (!$user instanceof BackendUser || $user->hasAccess('system_information', 'modules')) {
-            $modules['system']['modules']['system_information'] = [
-                'label' => $this->translator->trans('bwein.system_info.title'),
-                'title' => '',
-                'class' => 'navigation system_information',
-                'href' => $this->router->generate('contao_system_information'),
-                'isActive' => 'contao_system_information' === $request->attributes->get('_route'),
-            ];
+        // The core already creates a node for the BE_MOD entry (needed for the user
+        // permissions), so we only point it to our route
+        $node = $categoryNode->getChild('system_information') ?? $categoryNode->addChild($event->getFactory()->createItem('system_information'));
+
+        $node
+            ->setLabel($label)
+            ->setUri($this->router->generate(self::ROUTE))
+            ->setLinkAttribute('class', 'navigation system_information')
+            ->setLinkAttribute('title', $label)
+            ->setCurrent($isActive)
+            ->setExtra('translation_domain', false)
+        ;
+
+        if ($isActive) {
+            $categoryNode->setLinkAttribute('class', trim($categoryNode->getLinkAttribute('class').' trail'));
         }
-
-        return $modules;
     }
 }

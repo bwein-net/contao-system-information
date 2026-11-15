@@ -1,12 +1,12 @@
-{% extends "@Contao/be_main" %}
+{% extends "@Contao/be_main.html.twig" %}
 
 {% block main_content %}
     <div class="maintenance_inactive">
         {{ messages | raw }}
 
-        <fieldset class="tl_box" id="pal_system_load">
-            <legend onclick="AjaxRequest.toggleFieldset(this, 'system_load')">
-                {{ 'bwein.system_info.legend_load'|trans }}
+        <fieldset class="tl_box" id="pal_system_load" data-controller="contao--toggle-fieldset" data-contao--toggle-fieldset-id-value="system_load" data-contao--toggle-fieldset-collapsed-class="collapsed">
+            <legend>
+                <button type="button" data-action="contao--toggle-fieldset#toggle">{{ 'bwein.system_info.legend_load'|trans }}</button>
             </legend>
 
             {% include '@BweinSystemInformation/system_load.html.twig' with {
@@ -14,9 +14,9 @@
             } %}
         </fieldset>
 
-        <fieldset class="tl_box" id="pal_software">
-            <legend onclick="AjaxRequest.toggleFieldset(this, 'software')">
-                {{ 'bwein.system_info.legend_software'|trans }}
+        <fieldset class="tl_box" id="pal_software" data-controller="contao--toggle-fieldset" data-contao--toggle-fieldset-id-value="software" data-contao--toggle-fieldset-collapsed-class="collapsed">
+            <legend>
+                <button type="button" data-action="contao--toggle-fieldset#toggle">{{ 'bwein.system_info.legend_software'|trans }}</button>
             </legend>
 
             <div class="w50">
@@ -44,9 +44,9 @@
             </div>
         </fieldset>
 
-        <fieldset class="tl_box" id="pal_hardware">
-            <legend onclick="AjaxRequest.toggleFieldset(this, 'hardware')">
-                {{ 'bwein.system_info.legend_hardware'|trans }}
+        <fieldset class="tl_box" id="pal_hardware" data-controller="contao--toggle-fieldset" data-contao--toggle-fieldset-id-value="hardware" data-contao--toggle-fieldset-collapsed-class="collapsed">
+            <legend>
+                <button type="button" data-action="contao--toggle-fieldset#toggle">{{ 'bwein.system_info.legend_hardware'|trans }}</button>
             </legend>
 
             <div class="w50">
